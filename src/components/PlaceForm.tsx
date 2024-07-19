@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import { Text, TextInput } from "react-native-paper";
+import ImagePicker from "./ImagePicker";
 
 export default function PlaceForm() {
   const [placeTitle, setPlaceTitle] = useState("");
@@ -17,6 +18,7 @@ export default function PlaceForm() {
         value={placeTitle}
         label={"Place Title"}
       />
+      <ImagePicker/>
     </ScrollView>
   );
 }
