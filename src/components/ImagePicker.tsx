@@ -1,13 +1,18 @@
-import { View, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet, Alert } from "react-native";
 import { Button, Text } from "react-native-paper";
 import { launchCameraAsync } from "expo-image-picker";
 import { useState } from "react";
+import { useCameraPermission } from "../util/permissions";
 
 export default function ImagePicker() {
   const [pickedImageUri, setPickedImageUri] = useState<string | null>(null);
+  const hasPermission = useCameraPermission();
 
   const takeImageHandler = async () => {
-    console.log("take image");
+    if (!hasPermission) {
+      return;
+    }
+
     const image = await launchCameraAsync({
       allowsEditing: true,
       aspect: [16, 9],
@@ -23,6 +28,7 @@ export default function ImagePicker() {
       <Image source={{ uri: pickedImageUri }} style={styles.image} />
     );
   }
+
   return (
     <View>
       <View style={styles.imagePreview}>{imagePreview}</View>
@@ -40,6 +46,8 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     justifyContent: "center",
     alignItems: "center",
+    borderRadius: 8,
+    overflow: "hidden",
   },
   image: {
     width: "100%",
