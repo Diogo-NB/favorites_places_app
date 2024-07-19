@@ -2,7 +2,7 @@ import { View, StyleSheet, Image } from "react-native";
 import { Button, Text } from "react-native-paper";
 import { getCurrentPositionAsync as getLocation } from "expo-location";
 import { useLocationPermission } from "../util/permissions";
-import { getAdress, getMapPreviewUrl } from "../util/location";
+import { getAdress, getMapPreviewUrl, LocationData } from "../util/location";
 import { memo, useEffect, useState } from "react";
 import {
   AddPlaceRouteProp,
@@ -10,17 +10,14 @@ import {
 } from "../navigation/navigation-types";
 import { useRoute } from "@react-navigation/native";
 import { LatLng } from "react-native-maps";
-import { Location } from "./PlaceForm";
 
 interface LocationPickerProps {
-  onLocationPicked: (location: Location) => void;
+  onLocationPicked: (location: LocationData) => void;
 }
 
 export function LocationPicker({ onLocationPicked }: LocationPickerProps) {
   const [pickedLocation, setPickedLocation] = useState<LatLng | null>(null);
   const hasPermission = useLocationPermission();
-
-  console.log("LocationPicker rendered");
 
   const navigation = useRootStackNavigation();
   const route = useRoute<AddPlaceRouteProp>();

@@ -9,7 +9,7 @@ export default function PlaceItem({ place }: PlaceItemProps) {
   return (
     <View>
       <Text>{place.title}</Text>
-      <Text>{place.address}</Text>
+      <Text>{place.location.address}</Text>
     </View>
   );
 }

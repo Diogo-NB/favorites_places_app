@@ -1,12 +1,10 @@
+import { LocationData } from "../util/location";
+
 export default class Place {
   constructor(
     public title: string,
     public imageUri: string,
-    public address: string,
-    public location: {
-      lat: number;
-      lng: number;
-    },
+    public location: LocationData,
     public id?: string
   ) {
     if (!id) {
@@ -14,4 +12,5 @@ export default class Place {
       id = new Date().toISOString() + Math.random().toString();
     }
   }
+
 }

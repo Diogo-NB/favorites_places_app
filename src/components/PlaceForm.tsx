@@ -3,17 +3,19 @@ import { ScrollView, StyleSheet } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import ImagePicker from "./ImagePicker";
 import LocationPicker from "./LocationPicker";
-import { LatLng } from "react-native-maps";
+import { LocationData } from "../util/location";
 
-type PlaceFormState = {
+export type PlaceFormState = {
   title: string;
   imageUri: string;
-  location: Location | null;
+  location: LocationData | null;
 };
 
-export type Location = LatLng & { address: string };
+interface PlaceFormProps {
+  onSubmit: (place: PlaceFormState) => void;
+}
 
-export default function PlaceForm() {
+export default function PlaceForm({ onSubmit }: PlaceFormProps) {
   const [formState, setFormState] = useState<PlaceFormState>({
     title: "",
     imageUri: "",
@@ -35,7 +37,7 @@ export default function PlaceForm() {
   }, []);
 
   const changeLocationHandler = useCallback(
-    (location: Location) => {
+    (location: LocationData) => {
       setFormState((prevState) => ({
         ...prevState,
         location,
