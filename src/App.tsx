@@ -1,5 +1,6 @@
 import { useCallback } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { Text } from "react-native-paper";
 import {
   useFonts,
   Poppins_500Medium,
@@ -7,6 +8,7 @@ import {
 } from "@expo-google-fonts/poppins";
 import * as SplashScreen from "expo-splash-screen";
 import { registerRootComponent } from "expo";
+import AppThemeProvider from "./theme/AppThemeProvider";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -27,9 +29,19 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
-      <Text style={styles.text}>Hello, Expo!</Text>
-    </View>
+    <AppThemeProvider>
+      <View style={styles.container} onLayout={onLayoutRootView}>
+        <Text variant="displayMedium">Display Medium</Text>
+
+        <Text variant="headlineMedium">Headline Medium</Text>
+
+        <Text variant="titleMedium">Title Medium</Text>
+
+        <Text variant="bodyMedium">Body Medium</Text>
+
+        <Text variant="labelMedium">Label Medium</Text>
+      </View>
+    </AppThemeProvider>
   );
 }
 
@@ -39,12 +51,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-  },
-  text: {
-    fontFamily: "Poppins_700Bold",
-    fontSize: 24,
-    color: "black",
-    paddingVertical: 10,
   },
 });
 
