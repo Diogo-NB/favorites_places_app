@@ -1,6 +1,5 @@
 import { useCallback } from "react";
 import { StyleSheet, View } from "react-native";
-import { Text } from "react-native-paper";
 import {
   useFonts,
   Poppins_500Medium,
@@ -9,6 +8,7 @@ import {
 import * as SplashScreen from "expo-splash-screen";
 import { registerRootComponent } from "expo";
 import AppThemeProvider from "./theme/AppThemeProvider";
+import RootNavigationContainer from "./navigation/navigation-container";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -31,15 +31,7 @@ export default function App() {
   return (
     <AppThemeProvider>
       <View style={styles.container} onLayout={onLayoutRootView}>
-        <Text variant="displayMedium">Display Medium</Text>
-
-        <Text variant="headlineMedium">Headline Medium</Text>
-
-        <Text variant="titleMedium">Title Medium</Text>
-
-        <Text variant="bodyMedium">Body Medium</Text>
-
-        <Text variant="labelMedium">Label Medium</Text>
+        <RootNavigationContainer />
       </View>
     </AppThemeProvider>
   );
@@ -48,9 +40,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
   },
 });
 

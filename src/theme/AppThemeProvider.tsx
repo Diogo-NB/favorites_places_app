@@ -1,6 +1,7 @@
 import { PaperProvider } from "react-native-paper";
 import { useColorScheme } from "react-native";
 import theme from "./theme";
+import { StatusBar } from "expo-status-bar";
 
 interface AppThemeProviderProps {
   children: React.ReactNode;
@@ -11,5 +12,10 @@ export default function AppThemeProvider({ children }: AppThemeProviderProps) {
 
   const paperTheme = colorScheme === "dark" ? theme.dark : theme.light;
 
-  return <PaperProvider theme={paperTheme}>{children}</PaperProvider>;
+  return (
+    <>
+      <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+      <PaperProvider theme={paperTheme}>{children}</PaperProvider>
+    </>
+  );
 }
