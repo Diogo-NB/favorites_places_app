@@ -9,9 +9,17 @@ const RootStack = createNativeStackNavigator<RootStackParamList>();
 export default function RootNavigationContainer() {
   return (
     <NavigationContainer>
-      <RootStack.Navigator initialRouteName="allPlaces" >
-        <RootStack.Screen name="allPlaces" component={AllPlaces} />
-        <RootStack.Screen name="addPlace" component={AddPlace} />
+      <RootStack.Navigator initialRouteName="allPlaces">
+        <RootStack.Screen
+          name="allPlaces"
+          component={AllPlaces}
+          options={{ title: "Your favorite Places" }}
+        />
+        <RootStack.Screen
+          name="addPlace"
+          component={AddPlace}
+          options={{ title: "Add a new Place" }}
+        />
       </RootStack.Navigator>
     </NavigationContainer>
   );
