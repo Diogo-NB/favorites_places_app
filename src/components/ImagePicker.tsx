@@ -1,10 +1,14 @@
-import { View, Image, StyleSheet, Alert } from "react-native";
+import { View, Image, StyleSheet } from "react-native";
 import { Button, Text } from "react-native-paper";
 import { launchCameraAsync } from "expo-image-picker";
-import { useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useCameraPermission } from "../util/permissions";
 
-export default function ImagePicker() {
+interface ImagePickerProps {
+  onImageTaken: (imageUri: string) => void;
+}
+
+export function ImagePicker({ onImageTaken }: ImagePickerProps) {
   const [pickedImageUri, setPickedImageUri] = useState<string | null>(null);
   const hasPermission = useCameraPermission();
 
@@ -20,6 +24,12 @@ export default function ImagePicker() {
     });
     setPickedImageUri(image.assets ? image.assets[0].uri : null);
   };
+
+  useEffect(() => {
+    if (pickedImageUri) {
+      onImageTaken(pickedImageUri);
+    }
+  }, [pickedImageUri, onImageTaken]);
 
   let imagePreview = <Text variant="labelSmall">No image picked yet.</Text>;
 
@@ -38,6 +48,8 @@ export default function ImagePicker() {
     </View>
   );
 }
+
+export default memo(ImagePicker);
 
 const styles = StyleSheet.create({
   imagePreview: {
