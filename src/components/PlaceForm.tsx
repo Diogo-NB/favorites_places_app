@@ -37,15 +37,12 @@ export default function PlaceForm({ onAddPlace }: PlaceFormProps) {
     }));
   }, []);
 
-  const changeLocationHandler = useCallback(
-    (location: LocationData) => {
-      setFormState((prevState) => ({
-        ...prevState,
-        location,
-      }));
-    },
-    []
-  );
+  const changeLocationHandler = useCallback((location: LocationData) => {
+    setFormState((prevState) => ({
+      ...prevState,
+      location,
+    }));
+  }, []);
 
   const submitHandler = () => {
     const place = new Place(
@@ -53,8 +50,6 @@ export default function PlaceForm({ onAddPlace }: PlaceFormProps) {
       formState.imageUri,
       formState.location!
     );
-
-    console.log("PlaceForm submitHandler", place);
 
     onAddPlace(place);
   };
@@ -66,10 +61,16 @@ export default function PlaceForm({ onAddPlace }: PlaceFormProps) {
         onChangeText={changeTitleHandler}
         value={formState.title}
         label={"Place Title"}
+        style={styles.titleInput}
       />
       <ImagePicker onImageTaken={changeImageHandler} />
       <LocationPicker onLocationPicked={changeLocationHandler} />
-      <Button mode="outlined" style={styles.button} onPress={submitHandler}>
+      <Button
+      icon={"home-plus"}
+        mode="contained"
+        style={styles.confirmButton}
+        onPress={submitHandler}
+      >
         Add Place
       </Button>
     </ScrollView>
@@ -81,8 +82,12 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
   },
-  button: {
+  confirmButton: {
     width: "40%",
     alignSelf: "center",
+    marginTop: 15,
+  },
+  titleInput: {
+    marginBottom: 5,
   },
 });

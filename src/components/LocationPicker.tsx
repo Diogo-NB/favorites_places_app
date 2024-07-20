@@ -70,12 +70,12 @@ export function LocationPicker({ onLocationPicked }: LocationPickerProps) {
       <View style={styles.actions}>
         <Button
           icon="google-maps"
-          mode="contained"
+          mode="outlined"
           onPress={getLocationHandler}
         >
           Locate User
         </Button>
-        <Button icon="map" mode="contained" onPress={pickOnMapHandler}>
+        <Button icon="map" mode="outlined" onPress={pickOnMapHandler}>
           Pick on Map
         </Button>
       </View>
@@ -92,8 +92,9 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 8,
+    borderRadius: 10,
     overflow: "hidden",
+    borderWidth: 1,
   },
   image: {
     width: "100%",

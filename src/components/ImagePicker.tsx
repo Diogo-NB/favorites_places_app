@@ -42,7 +42,12 @@ export function ImagePicker({ onImageTaken }: ImagePickerProps) {
   return (
     <View>
       <View style={styles.imagePreview}>{imagePreview}</View>
-      <Button mode="contained" onPress={takeImageHandler} icon="camera">
+      <Button
+        mode="outlined"
+        onPress={takeImageHandler}
+        icon="camera"
+        style={styles.button}
+      >
         Take Image
       </Button>
     </View>
@@ -58,11 +63,16 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 8,
+    borderRadius: 10,
     overflow: "hidden",
+    borderWidth: 1,
   },
   image: {
     width: "100%",
     height: "100%",
+  },
+  button: {
+    alignSelf: "center",
+    marginVertical: 5,
   },
 });
