@@ -9,6 +9,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { registerRootComponent } from "expo";
 import AppThemeProvider from "./theme/AppThemeProvider";
 import RootNavigationContainer from "./navigation/navigation-container";
+import { PlacesProvider } from "./context/PlacesContext";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -30,9 +31,11 @@ export default function App() {
 
   return (
     <AppThemeProvider>
-      <View style={styles.container} onLayout={onLayoutRootView}>
-        <RootNavigationContainer />
-      </View>
+      <PlacesProvider>
+        <View style={styles.container} onLayout={onLayoutRootView}>
+          <RootNavigationContainer />
+        </View>
+      </PlacesProvider>
     </AppThemeProvider>
   );
 }

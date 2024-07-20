@@ -2,11 +2,15 @@ import { StyleSheet } from "react-native";
 import { FAB } from "react-native-paper";
 import PlacesList from "../components/PlacesList";
 import { AllPlacesProps } from "../navigation/navigation-types";
+import { PlacesContext } from "../context/PlacesContext";
+import { useContext } from "react";
 
 export default function AllPlaces({ navigation }: AllPlacesProps) {
+  const { places } = useContext(PlacesContext);
+
   return (
     <>
-      <PlacesList places={[]} />
+      <PlacesList places={places} />
       <FAB
         style={styles.fab}
         icon="plus"

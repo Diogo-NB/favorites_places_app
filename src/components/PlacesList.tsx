@@ -20,7 +20,7 @@ function EmptyListPlaceholder() {
 }
 
 export default function PlacesList({ places }: PlacesProps) {
-  console.log("PlacesList rendered");
+  console.log(places);
   const keyExtractor = useCallback((item: Place) => {
     if (item.id) {
       return item.id;

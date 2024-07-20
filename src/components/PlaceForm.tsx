@@ -4,6 +4,7 @@ import { Button, TextInput } from "react-native-paper";
 import ImagePicker from "./ImagePicker";
 import LocationPicker from "./LocationPicker";
 import { LocationData } from "../util/location";
+import Place from "../models/Place";
 
 export type PlaceFormState = {
   title: string;
@@ -12,10 +13,10 @@ export type PlaceFormState = {
 };
 
 interface PlaceFormProps {
-  onSubmit: (place: PlaceFormState) => void;
+  onAddPlace: (place: Place) => void;
 }
 
-export default function PlaceForm({ onSubmit }: PlaceFormProps) {
+export default function PlaceForm({ onAddPlace }: PlaceFormProps) {
   const [formState, setFormState] = useState<PlaceFormState>({
     title: "",
     imageUri: "",
@@ -47,7 +48,15 @@ export default function PlaceForm({ onSubmit }: PlaceFormProps) {
   );
 
   const submitHandler = () => {
-    console.log(formState);
+    const place = new Place(
+      formState.title,
+      formState.imageUri,
+      formState.location!
+    );
+
+    console.log("PlaceForm submitHandler", place);
+
+    onAddPlace(place);
   };
 
   return (

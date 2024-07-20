@@ -1,17 +1,16 @@
-import PlaceForm, { PlaceFormState } from "../components/PlaceForm";
+import { useContext } from "react";
+import PlaceForm from "../components/PlaceForm";
 import Place from "../models/Place";
 import { AddPlacesProps } from "../navigation/navigation-types";
+import { PlacesContext } from "../context/PlacesContext";
 
 export default function AddPlace({ navigation }: AddPlacesProps) {
-  const createPlaceHandler = (formResult: PlaceFormState) => {
-    const place = new Place(
-      formResult.title,
-      formResult.imageUri,
-      formResult.location!
-    );
+  const { addPlace } = useContext(PlacesContext);
 
-    console.log('New place: ', place);
+  const addPlaceHandler = (place: Place) => {
+    addPlace(place);
+    navigation.goBack();
   };
 
-  return <PlaceForm onSubmit={createPlaceHandler} />;
+  return <PlaceForm onAddPlace={addPlaceHandler} />;
 }
