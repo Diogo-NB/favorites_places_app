@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import {
   useFonts,
@@ -10,6 +10,7 @@ import { registerRootComponent } from "expo";
 import AppThemeProvider from "./theme/AppThemeProvider";
 import RootNavigationContainer from "./navigation/navigation-container";
 import { PlacesProvider } from "./context/PlacesContext";
+import dbService from "@services/dbService";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -19,13 +20,26 @@ export default function App() {
     Poppins_700Bold,
   });
 
+  const [isDbReady, setIsDbReady] = useState(false);
+
+  useEffect(() => {
+    const initDb = async () => {
+      await dbService.init();
+      setIsDbReady(true);
+    };
+
+    initDb();
+  }, []);
+
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
       await SplashScreen.hideAsync();
     }
   }, [fontsLoaded]);
 
-  if (!fontsLoaded) {
+  const isAppReady = isDbReady && fontsLoaded;
+
+  if (!isAppReady) {
     return null;
   }
 
