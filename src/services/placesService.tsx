@@ -12,8 +12,14 @@ export async function insertPlace(place: Place) {
   );
 }
 
+export async function fetchPlaces() {
+  const result: any[] = await db.getAllAsync("SELECT * FROM places;");
+  return result.map(Place.fromJson);
+}
+
 export const placesService = {
-  insertPlace,
+  insert: insertPlace,
+  fetch: fetchPlaces,
 };
 
 export default placesService;

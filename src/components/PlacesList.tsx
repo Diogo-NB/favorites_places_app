@@ -9,7 +9,6 @@ interface PlacesProps {
 }
 
 function EmptyListPlaceholder() {
-  console.log("EmptyListPlaceholder rendered");
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Text variant="bodyMedium">
@@ -20,7 +19,6 @@ function EmptyListPlaceholder() {
 }
 
 export default function PlacesList({ places }: PlacesProps) {
-  console.log(places);
   const keyExtractor = useCallback((item: Place) => {
     if (item.id) {
       return item.id;

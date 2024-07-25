@@ -3,10 +3,14 @@ import { FAB } from "react-native-paper";
 import PlacesList from "../components/PlacesList";
 import { AllPlacesProps } from "../navigation/navigation-types";
 import { PlacesContext } from "../context/PlacesContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 export default function AllPlaces({ navigation }: AllPlacesProps) {
-  const { places } = useContext(PlacesContext);
+  const { places, fetchPlaces } = useContext(PlacesContext);
+
+  useEffect(() => {
+    fetchPlaces();
+  }, []);
 
   return (
     <>
