@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import MapView, { MapPressEvent, Marker } from "react-native-maps";
 import { Alert, StyleSheet, View } from "react-native";
 import { LatLng } from "react-native-maps";
@@ -6,8 +6,8 @@ import { useRootStackNavigation } from "../navigation/navigation-types";
 import { FAB } from "react-native-paper";
 
 const initialRegion = {
-  latitude: 37.78,
-  longitude: -122.43,
+  latitude: -19.7585,
+  longitude: -47.9303,
   latitudeDelta: 0.0922,
   longitudeDelta: 0.0421,
 };
@@ -24,7 +24,9 @@ export default function Map() {
     if (!selectedLocation) {
       Alert.alert(
         "No location picked",
-        "Please pick a location by tapping on the map first."
+        "Please pick a location by tapping on the map first.",
+        [{ text: "OK" }],
+        { cancelable: true }
       );
       return;
     }
@@ -46,6 +48,7 @@ export default function Map() {
         )}
       </MapView>
       <FAB
+        variant="primary"
         icon="check"
         label="Confirm"
         style={styles.fab}
