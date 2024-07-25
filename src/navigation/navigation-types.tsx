@@ -1,11 +1,16 @@
 import { RouteProp, useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp, NativeStackScreenProps } from "@react-navigation/native-stack";
+import {
+  NativeStackNavigationProp,
+  NativeStackScreenProps,
+} from "@react-navigation/native-stack";
 import { LatLng } from "react-native-maps";
+import Place from "@models/Place";
 
 export type RootStackParamList = {
-  addPlace: undefined | { pickedLocation: LatLng }
+  addPlace: undefined | { pickedLocation: LatLng };
   allPlaces: undefined;
   map: undefined;
+  PlaceDetails: { place: Place };
 };
 
 export type AddPlacesProps = NativeStackScreenProps<
@@ -20,9 +25,11 @@ export type AllPlacesProps = NativeStackScreenProps<
   "allPlaces"
 >;
 
-export type MapProps = NativeStackScreenProps<
+export type MapProps = NativeStackScreenProps<RootStackParamList, "map">;
+
+export type PlaceDetailsProps = NativeStackScreenProps<
   RootStackParamList,
-  "map"
+  "PlaceDetails"
 >;
 
 export const useRootStackNavigation = () => {

@@ -3,6 +3,7 @@ import Place from "../models/Place";
 import { Button, Card, Text } from "react-native-paper";
 import { useContext } from "react";
 import { PlacesContext } from "../context/PlacesContext";
+import { useRootStackNavigation } from "../navigation/navigation-types";
 
 interface PlaceItemProps {
   place: Place;
@@ -10,15 +11,20 @@ interface PlaceItemProps {
 
 export default function PlaceItem({ place }: PlaceItemProps) {
   const { deletePlace } = useContext(PlacesContext);
+  const navigation = useRootStackNavigation();
 
   const handleDeletePlace = () => {
     if (!place.id) throw new Error("Place ID is missing");
     deletePlace(place.id);
   };
 
+  const handleViewPlace = () => {
+    navigation.navigate("PlaceDetails", { place });
+  };
+
   return (
     <View style={styles.cardContainer}>
-      <Card mode="elevated">
+      <Card mode="elevated" onPress={handleViewPlace}>
         <Card.Title title={place.title} subtitle={place.location.address} />
         <Card.Cover style={styles.cardCover} source={{ uri: place.imageUri }} />
         <Card.Content>
