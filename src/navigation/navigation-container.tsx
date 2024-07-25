@@ -24,7 +24,7 @@ export default function RootNavigationContainer() {
         <RootStack.Screen
           name="map"
           component={Map}
-          options={{ title: "Map" }}
+          options={{ title: "Pick a location on the map" }}
         />
       </RootStack.Navigator>
     </NavigationContainer>
