@@ -11,7 +11,13 @@ interface PlacesProps {
 
 function EmptyListPlaceholder() {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Text variant="bodyMedium">
         No places found. Maybe start adding some!
       </Text>
@@ -34,14 +40,18 @@ export default function PlacesList({ places }: PlacesProps) {
     return <PlaceItem place={item} />;
   }, []);
 
-  if (places.length === 0) return <EmptyListPlaceholder />;
+  if (places.length === 0) {
+    return <EmptyListPlaceholder />;
+  }
 
   return (
-    <FlatList
-      style={{ flex: 1 }}
-      data={places}
-      renderItem={renderItem}
-      keyExtractor={keyExtractor}
-    />
+    <>
+      <FlatList
+        style={{ flex: 1 }}
+        data={places}
+        renderItem={renderItem}
+        keyExtractor={keyExtractor}
+      />
+    </>
   );
 }

@@ -1,10 +1,11 @@
 import { useContext } from "react";
-import { View, StyleSheet } from "react-native";
-import { Button, Card, Text } from "react-native-paper";
+import { View, StyleSheet, Alert } from "react-native";
+import { Button, Card } from "react-native-paper";
 
 import Place from "@models/Place";
 import { PlacesContext } from "@context/PlacesContext";
 import { useRootStackNavigation } from "@navigation/navigation-types";
+import { SnackbarContext } from "@context/SnackbarContext";
 
 interface PlaceItemProps {
   place: Place;
@@ -13,6 +14,7 @@ interface PlaceItemProps {
 export default function PlaceItem({ place }: PlaceItemProps) {
   const navigation = useRootStackNavigation();
   const { deletePlace } = useContext(PlacesContext);
+  const { showSnackbar } = useContext(SnackbarContext);
 
   if (!place.id) throw new Error("Place id is required");
 
@@ -25,12 +27,30 @@ export default function PlaceItem({ place }: PlaceItemProps) {
   };
 
   const deletePlaceHandler = () => {
-    deletePlace(place.id!);
+    Alert.alert("Are you sure?", "Do you really want to delete this place?", [
+      { text: "No", style: "default" },
+      {
+        text: "Yes",
+        style: "destructive",
+        onPress: () => {
+          showSnackbar({
+            message: "Place deleted",
+            action: {
+              label: "Undo",
+              onPress: () => {
+                showSnackbar({ message: "Undo not implemented" });
+              },
+            },
+          });
+          deletePlace(place.id!);
+        },
+      },
+    ]);
   };
 
   return (
     <View style={styles.cardContainer}>
-      <Card mode="elevated" onPress={handleViewPlace}>
+      <Card mode="outlined" onPress={handleViewPlace}>
         <Card.Title title={place.title} subtitle={place.location.address} />
         <Card.Cover style={styles.cardCover} source={{ uri: place.imageUri }} />
         <Card.Actions>

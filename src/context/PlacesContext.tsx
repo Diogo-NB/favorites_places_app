@@ -2,6 +2,7 @@ import { createContext, useState } from "react";
 
 import Place from "@models/Place";
 import placesService from "@services/placesService";
+import { SnackbarProvider } from "./SnackbarContext";
 
 export type PlacesContextType = {
   places: Place[];
@@ -56,6 +57,8 @@ export function PlacesProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <PlacesContext.Provider value={ctxValue}>{children}</PlacesContext.Provider>
+    <PlacesContext.Provider value={ctxValue}>
+      <SnackbarProvider>{children}</SnackbarProvider>
+    </PlacesContext.Provider>
   );
 }
