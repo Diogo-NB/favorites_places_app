@@ -5,10 +5,15 @@ import {
   PlaceDetailsProps,
   useRootStackNavigation,
 } from "../navigation/navigation-types";
+import { useLayoutEffect } from "react";
 
 export default function PlaceDetails({ route }: PlaceDetailsProps) {
   const { place } = route.params;
   const navigation = useRootStackNavigation();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({ title: place.title });
+  }, [navigation, place.title]);
 
   const viewOnMapHandler = () => {
     navigation.navigate("map", { mode: "view", place });

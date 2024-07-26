@@ -4,7 +4,7 @@ import { StyleSheet, View } from "react-native";
 import { LatLng } from "react-native-maps";
 import { FAB } from "react-native-paper";
 
-type MapViewProps = {
+interface MapViewProps {
   initialLocation?: LatLng;
   onLocationSelected?: (location: LatLng | undefined) => void;
 };

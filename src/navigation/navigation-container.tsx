@@ -26,7 +26,6 @@ export default function RootNavigationContainer() {
         <RootStack.Screen
           name="PlaceDetails"
           component={PlaceDetails}
-          options={{ title: "Place Details" }}
         />
       </RootStack.Navigator>
     </NavigationContainer>
