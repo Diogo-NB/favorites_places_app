@@ -4,13 +4,13 @@
     "strict": true,
     "paths" : {
       "@components/*": ["./src/components/*"],
-      "@services/*": ["./src/services/*"],
+      "@context/*": ["./src/context/*"],
       "@models/*": ["./src/models/*"],
+      "@navigation/*": ["./src/navigation/*"],
       "@screens/*": ["./src/screens/*"],
+      "@services/*": ["./src/services/*"],
       "@theme/*": ["./src/theme/*"],
       "@util/*": ["./src/util/*"],
-      "@navigation/*": ["./src/navigation/*"],
-      "@context/*": ["./src/context/*"],
     }
   }
 }

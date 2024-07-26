@@ -1,28 +1,28 @@
-module.exports = function(api) {
+module.exports = function (api) {
   api.cache(true);
   return {
-    presets: ['babel-preset-expo'],
+    presets: ["babel-preset-expo"],
     plugins: [
       [
-        'module-resolver',
+        "module-resolver",
         {
-          root: ['./'],
+          root: ["./"],
           alias: {
-            '@components': './src/components',
-            '@screens': './src/screens',
-            '@assets': './assets',
-            '@utils': './src/util',
-            '@services': './src/services',
-            '@context': './src/context',
-            '@navigation': './src/navigation',
-            '@theme': './src/theme',
+            "@components": "./src/components",
+            "@context": "./src/context",
+            "@models": "./src/models",
+            "@navigation": "./src/navigation",
+            "@screens": "./src/screens",
+            "@services": "./src/services",
+            "@theme": "./src/theme",
+            "@utils": "./src/util",
           },
-        }
-      ]
+        },
+      ],
     ],
     env: {
       production: {
-        plugins: ['react-native-paper/babel'],
+        plugins: ["react-native-paper/babel"],
       },
     },
   };
