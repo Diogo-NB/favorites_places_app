@@ -48,7 +48,7 @@ export function LocationPicker({ onLocationPicked }: LocationPickerProps) {
   };
 
   const pickOnMapHandler = () => {
-    navigation.navigate("map");
+    navigation.navigate("map", { mode: "save" });
   };
 
   let locationPreview = (
@@ -68,11 +68,7 @@ export function LocationPicker({ onLocationPicked }: LocationPickerProps) {
     <View>
       <View style={styles.mapPreview}>{locationPreview}</View>
       <View style={styles.actions}>
-        <Button
-          icon="google-maps"
-          mode="outlined"
-          onPress={getLocationHandler}
-        >
+        <Button icon="google-maps" mode="outlined" onPress={getLocationHandler}>
           Locate User
         </Button>
         <Button icon="map" mode="outlined" onPress={pickOnMapHandler}>

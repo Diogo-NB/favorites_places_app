@@ -1,27 +1,40 @@
-import { useState } from "react";
-import MapView, { MapPressEvent, Marker } from "react-native-maps";
-import { Alert, StyleSheet, View } from "react-native";
+import { useLayoutEffect } from "react";
+import { Alert, StyleSheet } from "react-native";
 import { LatLng } from "react-native-maps";
 import { useRootStackNavigation } from "../navigation/navigation-types";
-import { FAB } from "react-native-paper";
+import MapView from "@components/MapView";
+import { MapProps } from "../navigation/navigation-types";
+import Place from "@models/Place";
 
-const initialRegion = {
-  latitude: -19.7585,
-  longitude: -47.9303,
-  latitudeDelta: 0.0922,
-  longitudeDelta: 0.0421,
-};
+export default function Map({ route, navigation }: MapProps) {
+  if (route.params.mode === "view") {
+    return MapModeView(route.params.place, navigation);
+  } else if (route.params.mode === "save") {
+    return MapModeSave(navigation);
+  } else {
+    throw new Error("Invalid mode");
+  }
+}
 
-export default function Map() {
-  const [selectedLocation, setSelectedLocation] = useState<LatLng | null>(null);
-  const navigation = useRootStackNavigation();
+function MapModeView(
+  place: Place,
+  navigation: ReturnType<typeof useRootStackNavigation>
+) {
+  useLayoutEffect(() => {
+    navigation.setOptions({ title: place.title });
+  }, [navigation, place.title]);
+  return <MapView initialLocation={place.location} />;
+}
 
-  const onMapPress: (event: MapPressEvent) => void = ({ nativeEvent }) => {
-    setSelectedLocation(nativeEvent.coordinate);
-  };
+function MapModeSave(navigation: ReturnType<typeof useRootStackNavigation>) {
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: "Pick a location on the map",
+    });
+  }, [navigation]);
 
-  const savePickedLocationHandler = () => {
-    if (!selectedLocation) {
+  const savePickedLocationHandler = (location: LatLng | undefined) => {
+    if (!location) {
       Alert.alert(
         "No location picked",
         "Please pick a location by tapping on the map first.",
@@ -32,30 +45,11 @@ export default function Map() {
     }
 
     navigation.navigate("addPlace", {
-      pickedLocation: selectedLocation,
+      pickedLocation: location,
     });
   };
 
-  return (
-    <View style={styles.container}>
-      <MapView
-        initialRegion={initialRegion}
-        style={styles.map}
-        onPress={onMapPress}
-      >
-        {selectedLocation && (
-          <Marker coordinate={selectedLocation} title="Picked Location" />
-        )}
-      </MapView>
-      <FAB
-        variant="primary"
-        icon="check"
-        label="Confirm"
-        style={styles.fab}
-        onPress={savePickedLocationHandler}
-      />
-    </View>
-  );
+  return <MapView onLocationSelected={savePickedLocationHandler} />;
 }
 
 const styles = StyleSheet.create({

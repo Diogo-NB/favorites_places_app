@@ -11,7 +11,7 @@ export default function PlaceDetails({ route }: PlaceDetailsProps) {
   const navigation = useRootStackNavigation();
 
   const viewOnMapHandler = () => {
-    navigation.navigate("map");
+    navigation.navigate("map", { mode: "view", place });
   };
 
   return (

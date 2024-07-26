@@ -22,11 +22,7 @@ export default function RootNavigationContainer() {
           component={AddPlace}
           options={{ title: "Add a new Place" }}
         />
-        <RootStack.Screen
-          name="map"
-          component={Map}
-          options={{ title: "Pick a location on the map" }}
-        />
+        <RootStack.Screen name="map" component={Map} />
         <RootStack.Screen
           name="PlaceDetails"
           component={PlaceDetails}

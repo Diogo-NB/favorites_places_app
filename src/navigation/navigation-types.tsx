@@ -9,8 +9,8 @@ import Place from "@models/Place";
 export type RootStackParamList = {
   addPlace: undefined | { pickedLocation: LatLng };
   allPlaces: undefined;
-  map: undefined;
   PlaceDetails: { place: Place };
+  map: { mode: "save" } | { mode: "view"; place: Place };
 };
 
 export type AddPlacesProps = NativeStackScreenProps<
