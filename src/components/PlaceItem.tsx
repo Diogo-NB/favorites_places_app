@@ -33,15 +33,7 @@ export default function PlaceItem({ place }: PlaceItemProps) {
         text: "Yes",
         style: "destructive",
         onPress: () => {
-          showSnackbar({
-            message: "Place deleted",
-            action: {
-              label: "Undo",
-              onPress: () => {
-                showSnackbar({ message: "Undo not implemented" });
-              },
-            },
-          });
+          showSnackbar({ message: "Place deleted" });
           deletePlace(place.id!);
         },
       },

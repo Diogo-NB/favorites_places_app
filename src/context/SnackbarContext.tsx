@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { Portal, Snackbar } from "react-native-paper";
+import { Portal, Snackbar, Text } from "react-native-paper";
 
 export type SnackbarContextType = {
   showSnackbar: (options: {
@@ -38,10 +38,11 @@ export function SnackbarProvider({ children }: { children: React.ReactNode }) {
       <Portal>
         <Snackbar
           visible={isVisible}
+          duration={3000}
           onDismiss={() => setIsVisible(false)}
           action={action}
         >
-          {message}
+          <Text variant="labelSmall">{message}</Text>
         </Snackbar>
       </Portal>
     </SnackbarContext.Provider>
