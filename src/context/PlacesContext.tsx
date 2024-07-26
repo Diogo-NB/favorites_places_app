@@ -7,31 +7,43 @@ export type PlacesContextType = {
   fetchPlaces: () => void;
   addPlace: (place: Place) => void;
   deletePlace: (id: string) => void;
+  updatePlace: (place: Place) => void;
 };
 
 export const PlacesContext = createContext<PlacesContextType>({
   places: [],
-  fetchPlaces: async () => {},
-  addPlace: async () => {},
-  deletePlace: async () => {},
+  fetchPlaces: () => {},
+  addPlace: () => {},
+  deletePlace: () => {},
+  updatePlace: () => {},
 });
 
 export function PlacesProvider({ children }: { children: React.ReactNode }) {
   const [places, setPlaces] = useState<Place[]>([]);
 
-  const addPlace = async (place: Place) => {
-    const result = await placesService.insert(place);
-    place.id = result.lastInsertRowId.toString();
-    setPlaces((currPlaces) => [...currPlaces, place]);
+  const addPlace = (place: Place) => {
+    placesService.insert(place).then((result) => {
+      place.id = result.lastInsertRowId.toString();
+      setPlaces((currPlaces) => [...currPlaces, place]);
+    });
   };
 
-  const deletePlace = async (id: string) => {
-    setPlaces((currPlaces) => currPlaces.filter((place) => place.id !== id));
+  const deletePlace = (id: string) => {
+    placesService.delete(id).then(() => {
+      setPlaces((currPlaces) => currPlaces.filter((place) => place.id !== id));
+    });
   };
 
-  const fetchPlaces = async () => {
-    const result = await placesService.fetch();
-    setPlaces(result);
+  const fetchPlaces = () => {
+    placesService.fetch().then(setPlaces);
+  };
+
+  const updatePlace = (place: Place) => {
+    placesService.update(place).then(() => {
+      setPlaces((currPlaces) =>
+        currPlaces.map((p) => (p.id === place.id ? place : p))
+      );
+    });
   };
 
   const ctxValue = {
@@ -39,6 +51,7 @@ export function PlacesProvider({ children }: { children: React.ReactNode }) {
     fetchPlaces,
     addPlace: addPlace,
     deletePlace: deletePlace,
+    updatePlace: updatePlace,
   };
 
   return (
