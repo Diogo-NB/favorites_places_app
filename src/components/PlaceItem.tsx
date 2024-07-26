@@ -11,6 +11,9 @@ interface PlaceItemProps {
 
 export default function PlaceItem({ place }: PlaceItemProps) {
   const navigation = useRootStackNavigation();
+  const { deletePlace } = useContext(PlacesContext);
+
+  if (!place.id) throw new Error("Place id is required");
 
   const viewOnMapHandler = () => {
     navigation.navigate("map", { mode: "view", place });
@@ -18,6 +21,10 @@ export default function PlaceItem({ place }: PlaceItemProps) {
 
   const handleViewPlace = () => {
     navigation.navigate("PlaceDetails", { place });
+  };
+
+  const deletePlaceHandler = () => {
+    deletePlace(place.id!);
   };
 
   return (
@@ -29,8 +36,8 @@ export default function PlaceItem({ place }: PlaceItemProps) {
           <Button mode="text" icon={"map"} onPress={viewOnMapHandler}>
             View on map
           </Button>
-          <Button mode="contained" icon={"pencil"}>
-            Edit
+          <Button mode="contained" icon={"delete"} onPress={deletePlaceHandler}>
+            Delete
           </Button>
         </Card.Actions>
       </Card>
