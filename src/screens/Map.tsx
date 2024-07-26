@@ -1,5 +1,5 @@
 import { useLayoutEffect } from "react";
-import { Alert, StyleSheet } from "react-native";
+import { Alert } from "react-native";
 import { LatLng } from "react-native-maps";
 import { useRootStackNavigation } from "../navigation/navigation-types";
 import MapView from "@components/MapView";
@@ -51,19 +51,3 @@ function MapModeSave(navigation: ReturnType<typeof useRootStackNavigation>) {
 
   return <MapView onLocationSelected={savePickedLocationHandler} />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  map: {
-    width: "100%",
-    height: "100%",
-  },
-  fab: {
-    position: "absolute",
-    margin: 16,
-    right: 0,
-    bottom: 0,
-  },
-});
