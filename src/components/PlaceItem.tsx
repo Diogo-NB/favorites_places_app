@@ -10,12 +10,10 @@ interface PlaceItemProps {
 }
 
 export default function PlaceItem({ place }: PlaceItemProps) {
-  const { deletePlace } = useContext(PlacesContext);
   const navigation = useRootStackNavigation();
 
-  const handleDeletePlace = () => {
-    if (!place.id) throw new Error("Place ID is missing");
-    deletePlace(place.id);
+  const viewOnMapHandler = () => {
+    navigation.navigate("map", { mode: "view", place });
   };
 
   const handleViewPlace = () => {
@@ -27,13 +25,14 @@ export default function PlaceItem({ place }: PlaceItemProps) {
       <Card mode="elevated" onPress={handleViewPlace}>
         <Card.Title title={place.title} subtitle={place.location.address} />
         <Card.Cover style={styles.cardCover} source={{ uri: place.imageUri }} />
-        <Card.Content>
-          <Card.Actions>
-            <Button icon={"delete"} onPress={handleDeletePlace}>
-              Delete
-            </Button>
-          </Card.Actions>
-        </Card.Content>
+        <Card.Actions>
+          <Button mode="text" icon={"map"} onPress={viewOnMapHandler}>
+            View on map
+          </Button>
+          <Button mode="contained" icon={"pencil"}>
+            Edit
+          </Button>
+        </Card.Actions>
       </Card>
     </View>
   );
