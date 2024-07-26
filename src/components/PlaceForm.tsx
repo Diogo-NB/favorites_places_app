@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { ScrollView, StyleSheet } from "react-native";
+import { Alert, ScrollView, StyleSheet } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 
 import ImagePicker from "@components/ImagePicker";
@@ -46,11 +46,26 @@ export default function PlaceForm({ onAddPlace }: PlaceFormProps) {
   }, []);
 
   const submitHandler = () => {
-    const place = new Place(
-      formState.title,
-      formState.imageUri,
-      formState.location!
-    );
+    const title = formState.title.trim();
+    const imageUri = formState.imageUri;
+    const location = formState.location;
+
+    if (
+      !title ||
+      !imageUri ||
+      !location?.address ||
+      !location?.latitude ||
+      !location?.longitude
+    ) {
+      Alert.alert(
+        "Invalid Input",
+        "Please enter a valid title, image and location!",
+        [{ text: "Okay" }]
+      );
+      return;
+    }
+
+    const place = new Place(title, imageUri, location);
 
     onAddPlace(place);
   };
@@ -67,7 +82,7 @@ export default function PlaceForm({ onAddPlace }: PlaceFormProps) {
       <ImagePicker onImageTaken={changeImageHandler} />
       <LocationPicker onLocationPicked={changeLocationHandler} />
       <Button
-      icon={"home-plus"}
+        icon={"home-plus"}
         mode="contained"
         style={styles.confirmButton}
         onPress={submitHandler}
