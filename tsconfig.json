@@ -6,6 +6,11 @@
       "@components/*": ["./src/components/*"],
       "@services/*": ["./src/services/*"],
       "@models/*": ["./src/models/*"],
+      "@screens/*": ["./src/screens/*"],
+      "@theme/*": ["./src/theme/*"],
+      "@util/*": ["./src/util/*"],
+      "@navigation/*": ["./src/navigation/*"],
+      "@context/*": ["./src/context/*"],
     }
   }
 }

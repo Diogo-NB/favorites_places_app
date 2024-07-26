@@ -1,15 +1,16 @@
 import { useCallback, useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
+import { registerRootComponent } from "expo";
+import * as SplashScreen from "expo-splash-screen";
 import {
   useFonts,
   Poppins_500Medium,
   Poppins_700Bold,
 } from "@expo-google-fonts/poppins";
-import * as SplashScreen from "expo-splash-screen";
-import { registerRootComponent } from "expo";
-import AppThemeProvider from "./theme/AppThemeProvider";
-import RootNavigationContainer from "./navigation/navigation-container";
-import { PlacesProvider } from "./context/PlacesContext";
+
+import AppThemeProvider from "@theme/AppThemeProvider";
+import RootNavigationContainer from "@navigation/navigation-container";
+import { PlacesProvider } from "@context/PlacesContext";
 import dbService from "@services/dbService";
 
 SplashScreen.preventAutoHideAsync();

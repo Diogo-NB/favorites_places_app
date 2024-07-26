@@ -1,4 +1,4 @@
-import { LocationData } from "../util/location";
+import { LocationData } from "@util/location";
 
 export default class Place {
   constructor(

@@ -1,9 +1,10 @@
-import { View, StyleSheet } from "react-native";
-import Place from "../models/Place";
-import { Button, Card, Text } from "react-native-paper";
 import { useContext } from "react";
-import { PlacesContext } from "../context/PlacesContext";
-import { useRootStackNavigation } from "../navigation/navigation-types";
+import { View, StyleSheet } from "react-native";
+import { Button, Card, Text } from "react-native-paper";
+
+import Place from "@models/Place";
+import { PlacesContext } from "@context/PlacesContext";
+import { useRootStackNavigation } from "@navigation/navigation-types";
 
 interface PlaceItemProps {
   place: Place;

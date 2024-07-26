@@ -1,9 +1,9 @@
 import { useLayoutEffect } from "react";
 import { Alert } from "react-native";
 import { LatLng } from "react-native-maps";
-import { useRootStackNavigation } from "../navigation/navigation-types";
+
+import { useRootStackNavigation, MapProps } from "@navigation/navigation-types";
 import MapView from "@components/MapView";
-import { MapProps } from "../navigation/navigation-types";
 import Place from "@models/Place";
 
 export default function Map({ route, navigation }: MapProps) {

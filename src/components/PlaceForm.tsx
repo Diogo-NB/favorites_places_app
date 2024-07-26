@@ -1,10 +1,11 @@
 import { useCallback, useState } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import { Button, TextInput } from "react-native-paper";
-import ImagePicker from "./ImagePicker";
-import LocationPicker from "./LocationPicker";
-import { LocationData } from "../util/location";
-import Place from "../models/Place";
+
+import ImagePicker from "@components/ImagePicker";
+import LocationPicker from "@components/LocationPicker";
+import { LocationData } from "@util/location";
+import Place from "@models/Place";
 
 export type PlaceFormState = {
   title: string;

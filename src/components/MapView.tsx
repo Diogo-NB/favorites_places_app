@@ -1,8 +1,7 @@
 import { useMemo, useState } from "react";
-import RNMapView, { MapPressEvent, Marker } from "react-native-maps";
 import { StyleSheet, View } from "react-native";
-import { LatLng } from "react-native-maps";
 import { FAB } from "react-native-paper";
+import RNMapView, { MapPressEvent, Marker, LatLng } from "react-native-maps";
 
 interface MapViewProps {
   initialLocation?: LatLng;

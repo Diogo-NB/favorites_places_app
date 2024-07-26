@@ -1,7 +1,8 @@
 import { PaperProvider } from "react-native-paper";
 import { useColorScheme } from "react-native";
-import theme from "./theme";
 import { StatusBar } from "expo-status-bar";
+
+import theme from "@theme/theme";
 
 interface AppThemeProviderProps {
   children: React.ReactNode;

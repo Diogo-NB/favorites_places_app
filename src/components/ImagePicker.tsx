@@ -1,8 +1,9 @@
+import { memo, useEffect, useState } from "react";
 import { View, Image, StyleSheet } from "react-native";
 import { Button, Text } from "react-native-paper";
 import { launchCameraAsync } from "expo-image-picker";
-import { memo, useEffect, useState } from "react";
-import { useCameraPermission } from "../util/permissions";
+
+import { useCameraPermission } from "@util/permissions";
 
 interface ImagePickerProps {
   onImageTaken: (imageUri: string) => void;

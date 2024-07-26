@@ -1,10 +1,11 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { RootStackParamList } from "./navigation-types";
 import { NavigationContainer } from "@react-navigation/native";
-import AllPlaces from "../screens/AllPlaces";
-import AddPlace from "../screens/AddPlace";
-import Map from "../screens/Map";
-import PlaceDetails from "../screens/PlaceDetails";
+
+import { RootStackParamList } from "@navigation/navigation-types";
+import AllPlaces from "@screens/AllPlaces";
+import AddPlace from "@screens/AddPlace";
+import Map from "@screens/Map";
+import PlaceDetails from "@screens/PlaceDetails";
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
@@ -23,10 +24,7 @@ export default function RootNavigationContainer() {
           options={{ title: "Add a new Place" }}
         />
         <RootStack.Screen name="map" component={Map} />
-        <RootStack.Screen
-          name="PlaceDetails"
-          component={PlaceDetails}
-        />
+        <RootStack.Screen name="PlaceDetails" component={PlaceDetails} />
       </RootStack.Navigator>
     </NavigationContainer>
   );

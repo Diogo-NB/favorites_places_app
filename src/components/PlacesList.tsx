@@ -1,8 +1,9 @@
-import { FlatList, View } from "react-native";
-import Place from "../models/Place";
 import { useCallback } from "react";
-import PlaceItem from "./PlaceItem";
+import { FlatList, View } from "react-native";
 import { Text } from "react-native-paper";
+
+import Place from "@models/Place";
+import PlaceItem from "@components/PlaceItem";
 
 interface PlacesProps {
   places: Place[];

@@ -1,9 +1,10 @@
+import { memo, useEffect, useState } from "react";
 import { View, StyleSheet, Image } from "react-native";
 import { Button, Text } from "react-native-paper";
 import { getCurrentPositionAsync as getLocation } from "expo-location";
-import { useLocationPermission } from "../util/permissions";
-import { getAdress, getMapPreviewUrl, LocationData } from "../util/location";
-import { memo, useEffect, useState } from "react";
+
+import { useLocationPermission } from "@util/permissions";
+import { getAdress, getMapPreviewUrl, LocationData } from "@util/location";
 import {
   AddPlaceRouteProp,
   useRootStackNavigation,

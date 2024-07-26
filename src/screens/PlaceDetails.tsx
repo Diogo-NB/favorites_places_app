@@ -1,11 +1,11 @@
+import { useLayoutEffect } from "react";
 import { ScrollView, StyleSheet, View, Image } from "react-native";
 import { Text, Button } from "react-native-paper";
 
 import {
   PlaceDetailsProps,
   useRootStackNavigation,
-} from "../navigation/navigation-types";
-import { useLayoutEffect } from "react";
+} from "@navigation/navigation-types";
 
 export default function PlaceDetails({ route }: PlaceDetailsProps) {
   const { place } = route.params;
