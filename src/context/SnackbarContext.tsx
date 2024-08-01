@@ -42,7 +42,9 @@ export function SnackbarProvider({ children }: { children: React.ReactNode }) {
           onDismiss={() => setIsVisible(false)}
           action={action}
         >
-          <Text variant="labelSmall">{message}</Text>
+          <Text variant="labelLarge" style={{ color: "white" }}>
+            {message}
+          </Text>
         </Snackbar>
       </Portal>
     </SnackbarContext.Provider>
